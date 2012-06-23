@@ -74,7 +74,7 @@ function tlspi_parse_show() {
                }
 
        endforeach;
-
+	
        
        echo '<h1> Preview </h1>';
        
