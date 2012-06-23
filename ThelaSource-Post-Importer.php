@@ -14,7 +14,3 @@ require_once( 'lib/class.the_la_source_importer.php' );
 
 // add the admin options page
 add_action('admin_menu', array('the_la_source_importer', 'add_menu' ) );
-
-// hey there
-
-// hey 
