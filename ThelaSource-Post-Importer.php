@@ -12,8 +12,6 @@ if ( !defined('ABSPATH') )
 
 require_once( 'lib/class.the_la_source_importer.php' );
 
-//add_action( 'init',        			array( 'the_la_source_impoter', 'init' ) );
-
 // add the admin options page
 add_action('admin_menu', array('the_la_source_importer', 'add_menu' ) );
 
