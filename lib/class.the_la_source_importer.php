@@ -7,12 +7,12 @@ class the_la_source_importer{
 		
 		if($_POST) { // if the form was submitted
 			if ($_POST['preview_submit']) {
-				require('submitted.php');
+				require(TLSI_DIR_PATH.'/views/submitted.php');
 			} else {
-				require('preview.php');
+				require(TLSI_DIR_PATH.'/views/preview.php');
 			}
 		} else { // show the form
-			require('form.php');
+			require(TLSI_DIR_PATH.'/views/form.php');
 		}
 		
 		
@@ -21,10 +21,37 @@ class the_la_source_importer{
 	
 	// add page to settings menu
 	public static function add_menu() {
-		add_options_page( 'Posts Importer', 'Posts Importer', 'manage_options', 'plugin', array( 'the_la_source_importer', 'tlspi_initiate_page' ) );
+		add_options_page( 'Posts Importer', 'Posts Importer', 'manage_options', 'tlspi_plugin', array( 'the_la_source_importer', 'tlspi_initiate_page' ) );
 	
 	}
-
-
-
+	
+	public static function wp_enqueue_scripts() {
+		
+		wp_enqueue_script(
+			'mirror',
+			TLSI_DIR_URL.'/js/codemirror.js'
+		);
+		wp_enqueue_script(
+			'tlspi',
+			TLSI_DIR_URL.'/js/tlspi.js',
+			array('jquery')
+		);
+		
+		
+		
+		wp_enqueue_script(
+			'mirror-xml',
+			TLSI_DIR_URL.'/js/xml.js',
+			array('mirror')
+		);
+		
+		wp_enqueue_style(
+			'mirror-css',
+			TLSI_DIR_URL.'/css/codemirror.css'
+		);
+		wp_enqueue_style(
+			'tlspi-css',
+			TLSI_DIR_URL.'/css/tlspi.css'
+		);
+	}
 } 

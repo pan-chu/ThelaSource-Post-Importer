@@ -1,0 +1,29 @@
+
+
+.the_title{
+	width: 70%;
+	clear: both;
+	padding-top: 50px;
+}
+.the_title input{
+	font-size: 24px;
+	width: 100%;
+	padding: 4px;
+}
+.the_content{
+	width:70%;
+	float: left;
+}
+.post-meta{
+	float: right;
+	width: 25%;
+	border: 1px solid #DDD;
+	background: #EEE;
+	padding:10px 20px;
+	margin-top: 30px;
+}
+input.button-primary{
+	 clear: both;
+    float: left;
+    margin-top: 20px;
+}

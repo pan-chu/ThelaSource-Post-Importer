@@ -1,13 +1,5 @@
 <?php
 
-
-echo "<pre>";
-var_dump($_POST);
-echo "</pre>";
-
-
-global $the_text, $the_text_array, $text_array_size, $post_array;
-
 if ( !current_user_can( 'manage_options' ) ) {
 	   wp_die( 'You do not have sufficient permission to access this page.');
 }
@@ -29,9 +21,10 @@ function tlspi_insert_posts() {
 	for ($i = 1; $i <= $_POST['num_posts']; $i++) {
 		if( $_POST['post'][$i]['ready'] ){
 			$temp = array(
-				'post_title' => $_POST['post-'.$i.'-title'],
+				'post_title' => $_POST['post'][$i]['title'],
 				'post_author' => $_POST['post'][$i]['author'],
-				'post_content' => $_POST['post-'.$i.'-content'],
+				'post_content' => $_POST['post'][$i]['content'],
+				'post_category' => $_POST['post'][$i]['categories'],
 				'post_status' => 'draft'
 			);
 		
