@@ -26,7 +26,16 @@ class the_la_source_importer{
 	}
 	
 	public static function wp_enqueue_scripts() {
+		wp_enqueue_script(
+			'chosen',
+			TLSI_DIR_URL.'/js/chosen.js',
+			array('jquery')
+		);
 		
+		wp_enqueue_script(
+			'importer',
+			TLSI_DIR_URL.'/js/importer.js'
+		);
 		wp_enqueue_script(
 			'mirror',
 			TLSI_DIR_URL.'/js/codemirror.js'
@@ -44,7 +53,11 @@ class the_la_source_importer{
 			TLSI_DIR_URL.'/js/xml.js',
 			array('mirror')
 		);
-		
+		wp_enqueue_style(
+			'chosen-css',
+			TLSI_DIR_URL.'/css/chosen
+			.css'
+		);
 		wp_enqueue_style(
 			'mirror-css',
 			TLSI_DIR_URL.'/css/codemirror.css'

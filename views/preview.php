@@ -37,7 +37,7 @@ function tlspi_parse_show() {
 	                   $title = stripslashes($line);
 	           } else {
 	          // 	echo 'this line is content<br />';
-	                   $content .="".stripslashes($line)."\n";
+	                   $content .="<p>".stripslashes($line)."</p>";
 	           }
 	       }
 
@@ -72,19 +72,32 @@ function tlspi_parse_show() {
        
        $count_post = 1;
        foreach ($posts as $apost):
-       		
+       		echo '<div class="the_post_wrap">';
        		echo '<div class="the_title">';
        		echo '<input type="text"  id="title-'.$count_post.'" name="post['.$count_post.'][title]" value="'.mb_convert_encoding($apost['title'], "HTML-ENTITIES", "UTF-8").'"><br />';
        		echo "</div>";
        		echo '<div class="the_content">';
        		$content =	mb_convert_encoding($apost['content'] , "HTML-ENTITIES", "UTF-8");
-       		wp_editor( $content, 'post['.$count_post.'][content]' ); 
+       		wp_editor( $content, 'post_'.$count_post.'_content' , array( 'textarea_name' => 'post['.$count_post.'][content]')); 
        		echo '
        		</div>';
-       		echo "<div class='post-meta'>
-       			Categories:
+       		echo "<div class='post-meta submitbox '>
+       			Categories:<br />
        		";
-       		echo "<ul class='categories' id='cat-".$count_post."'>"; wp_category_checklist(); echo "</ul>";
+       		echo '<select class="categories" name="post['.$count_post.'][categories][]" id="cat-'.$count_post.'" multiple="true" >'; 
+       		$args = array(
+	'type'                     => 'post',
+	'orderby'                  => 'name',
+	'order'                    => 'ASC',
+	'hide_empty'               => 0,
+	'hierarchical'             => 1);
+	       		$categories = get_categories( $args );
+	       		foreach($categories as $category):
+       				echo "<option value='".$category->term_id."' /> ".$category->name."</option>";
+       				
+       			endforeach;
+       		echo "</select>";
+       		echo '<p>';
        		echo '<label>Author:<br /> ';
        		wp_dropdown_users( array(
 		'who' => 'authors',
@@ -92,11 +105,9 @@ function tlspi_parse_show() {
 		'selected' => empty($user_ID),
 		'include_selected' => true
 	) );	
-       		echo '</label><br /><br /><br />';
-       		echo '<label>Include ?
-       		<input type="checkbox" name="post['.$count_post.'][ready]" /></label>';
+       		echo '</label></p><br /><br />';
        		echo "</div>";
-       		
+       		echo "</div>";
        		       	
        		$count_post ++;
        endforeach;

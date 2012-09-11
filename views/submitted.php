@@ -19,17 +19,17 @@ function tlspi_insert_posts() {
 	$temp = array();	
 	
 	for ($i = 1; $i <= $_POST['num_posts']; $i++) {
-		if( $_POST['post'][$i]['ready'] ){
-			$temp = array(
-				'post_title' => $_POST['post'][$i]['title'],
-				'post_author' => $_POST['post'][$i]['author'],
-				'post_content' => $_POST['post'][$i]['content'],
-				'post_category' => $_POST['post'][$i]['categories'],
-				'post_status' => 'draft'
-			);
 		
-			wp_insert_post($temp);
-		}
+		$temp = array(
+			'post_title' => $_POST['post'][$i]['title'],
+			'post_author' => $_POST['post'][$i]['author'],
+			'post_content' => $_POST['post'][$i]['content'],
+			'post_category' => $_POST['post'][$i]['categories'],
+			'post_status' => 'draft'
+		);
+	
+		wp_insert_post($temp);
+		
 
 	}
 	
