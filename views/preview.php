@@ -1,6 +1,6 @@
 <?php
 
-
+    
 global $the_text, $the_text_array, $text_array_size, $post_array;
 
 if ( !current_user_can( 'manage_options' ) ) {
@@ -74,17 +74,25 @@ function tlspi_parse_show() {
        foreach ($posts as $apost):
        		echo '<div class="the_post_wrap">';
        		echo '<div class="the_title">';
-       		echo '<input type="text"  id="title-'.$count_post.'" name="post['.$count_post.'][title]" value="'.mb_convert_encoding($apost['title'], "HTML-ENTITIES", "UTF-8").'"><br />';
+       		
+       		echo '<input type="text"  id="title-'.$count_post.'" name="posts['.$count_post.'][title]" value="'.mb_convert_encoding($apost['title'], "HTML-ENTITIES", "UTF-8").'"><br />';
        		echo "</div>";
        		echo '<div class="the_content">';
+       		// $apost['content'] = tlspi_convert_text_to_links( $apost['content'] );
        		$content =	mb_convert_encoding($apost['content'] , "HTML-ENTITIES", "UTF-8");
-       		wp_editor( $content, 'post_'.$count_post.'_content' , array( 'textarea_name' => 'post['.$count_post.'][content]')); 
+       		$excerpt = explode( '.', $content);
+       		
+       		$content = make_clickable( $content );
+       		
+       		wp_editor( $content, 'post_'.$count_post.'_content' , array( 'textarea_name' => 'posts['.$count_post.'][content]')); 
        		echo '
+       		<label style="display:block; margin-top:20px; ">Excerpt</label>
+       		<textarea  style="width:100%; height:100px;" name="posts['.$count_post.'][excerpt]">'.strip_tags ($excerpt[0]).'.</textarea>
        		</div>';
        		echo "<div class='post-meta submitbox '>
        			Categories:<br />
        		";
-       		echo '<select class="categories" name="post['.$count_post.'][categories][]" id="cat-'.$count_post.'" multiple="true" >'; 
+       		echo '<select class="categories" name="posts['.$count_post.'][categories][]" id="cat-'.$count_post.'" multiple="true" >'; 
        		$args = array(
 	'type'                     => 'post',
 	'orderby'                  => 'name',
@@ -101,7 +109,7 @@ function tlspi_parse_show() {
        		echo '<label>Author:<br /> ';
        		wp_dropdown_users( array(
 		'who' => 'authors',
-		'name' => 'post['.$count_post.'][author]',
+		'name' => 'posts['.$count_post.'][author]',
 		'selected' => empty($user_ID),
 		'include_selected' => true
 	) );	
@@ -144,5 +152,6 @@ function tlspi_get_user_form( $author_text, $count ){
 		<?php endforeach; ?>
 	</select>
 	<br \><br \>
-	<?
+	<?php
 }
+

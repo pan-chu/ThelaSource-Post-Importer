@@ -3,7 +3,7 @@
 Plugin Name: The La Source Post Importer
 Plugin URI: https://github.com/echu113/ThelaSource-Post-Importer
 Description: This plugin is designed for easy posting of The Source Newspaper articles. Should be able to parse a given document into specific posts. 
-Version: 1.0
+Version: 2.0
 Author: Enej, Eric
 License: GPL2
 */

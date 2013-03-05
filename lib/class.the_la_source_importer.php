@@ -6,7 +6,7 @@ class the_la_source_importer{
 	
 		
 		if($_POST) { // if the form was submitted
-			if ($_POST['preview_submit']) {
+			if ( isset( $_POST['preview_submit'] ) ) {
 				require(TLSI_DIR_PATH.'/views/submitted.php');
 			} else {
 				require(TLSI_DIR_PATH.'/views/preview.php');
