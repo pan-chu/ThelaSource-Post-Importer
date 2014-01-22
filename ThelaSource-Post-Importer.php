@@ -19,4 +19,4 @@ require_once( 'lib/class.the_la_source_importer.php' );
 // add the admin options page
 add_action( 'admin_menu', array( 'the_la_source_importer', 'add_menu' ) );
 add_action( 'admin_print_styles-settings_page_tlspi_plugin', array( 'the_la_source_importer', 'wp_enqueue_scripts' ) );
-// this is from dev
+// this is from de
